@@ -55,6 +55,7 @@ const FALLBACK_DATA: Record<string, MarketInstrument[]> = {
   ]
 };
 
+// Funciones principales
 export async function getAccionesData(): Promise<MarketInstrument[]> {
   return FALLBACK_DATA.acciones;
 }
@@ -70,3 +71,9 @@ export async function getCedearsData(): Promise<MarketInstrument[]> {
 export async function getBonosData(): Promise<MarketInstrument[]> {
   return FALLBACK_DATA.bonos;
 }
+
+// ALIAS Y COMPATIBILIDAD (Satisface todas las importaciones que te daban error)
+export const getAccionesArgentinas = getAccionesData;
+export const getIndicesInternacionales = getIndicesData;
+export const getMerval = getIndicesData;
+export const obtenerMerval = getIndicesData;
