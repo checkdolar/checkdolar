@@ -1,6 +1,6 @@
 // Tipos compartidos por todo el proyecto CheckDolar.
 
-export type Trend = "up" | "down" | "flat";
+export type Trend = "up" | "down" | "flat" | "neutral";
 
 export interface DolarCotizacion {
   casa: string; // ej: "oficial", "blue", "bolsa", "contadoconliqui"
@@ -28,26 +28,30 @@ export interface CryptoCotizacion {
   simbolo: string; // ej: "BTC"
   nombre: string;
   precioUsd: number | null;
-  variacion24hPorcentual: number | null;
-  marketCap: number | null;
-  volumen24h: number | null;
-  ranking: number | null;
+  precioArs?: number | null;
+  variacion24h?: number | null;
+  variacion24hPorcentual?: number | null;
+  capitalizacionUsd?: number | null;
+  marketCap?: number | null;
+  volumen24hUsd?: number | null;
+  volumen24h?: number | null;
+  ranking?: number | null;
   imagen?: string;
   sparkline?: number[];
   trend?: Trend;
-  fechaActualizacion: string;
+  fechaActualizacion?: string;
 }
 
 export interface MercadoInstrumento {
   simbolo: string;
   nombre: string;
   precio: number | null;
-  variacionPorcentual: number | null;
-  maximo: number | null;
-  minimo: number | null;
-  volumen: number | null;
-  moneda: string;
-  fechaActualizacion: string;
+  variacionPorcentual?: number | null;
+  maximo?: number | null;
+  minimo?: number | null;
+  volumen?: number | null;
+  moneda?: string;
+  fechaActualizacion?: string;
   trend?: Trend;
 }
 
