@@ -55,7 +55,7 @@ const FALLBACK_DATA: Record<string, MarketInstrument[]> = {
   ]
 };
 
-// Funciones principales
+// Funciones principales y exportadas de forma individual y limpia
 export async function getAccionesData(): Promise<MarketInstrument[]> {
   return FALLBACK_DATA.acciones;
 }
@@ -72,8 +72,19 @@ export async function getBonosData(): Promise<MarketInstrument[]> {
   return FALLBACK_DATA.bonos;
 }
 
-// ALIAS Y COMPATIBILIDAD (Satisface todas las importaciones que te daban error)
-export const getAccionesArgentinas = getAccionesData;
-export const getIndicesInternacionales = getIndicesData;
-export const getMerval = getIndicesData;
-export const obtenerMerval = getIndicesData;
+// Funciones de alias declaradas formalmente con "export async function"
+export async function getMerval(): Promise<MarketInstrument[]> {
+  return FALLBACK_DATA.indices;
+}
+
+export async function obtenerMerval(): Promise<MarketInstrument[]> {
+  return FALLBACK_DATA.indices;
+}
+
+export async function getAccionesArgentinas(): Promise<MarketInstrument[]> {
+  return FALLBACK_DATA.acciones;
+}
+
+export async function getIndicesInternacionales(): Promise<MarketInstrument[]> {
+  return FALLBACK_DATA.indices;
+}

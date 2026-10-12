@@ -10,6 +10,9 @@ export const DOLARES_ARGENTINA = [
   { casa: 'cripto', nombre: 'Dólar Cripto' },
 ];
 
+// Alias requerido por componentes que buscan MONEDAS_DOLARAPI
+export const MONEDAS_DOLARAPI = DOLARES_ARGENTINA;
+
 export const MONEDAS_SOPORTADAS = [
   { codigo: 'USD', nombre: 'Dólar Estadounidense', bandera: '🇺🇸' },
   { codigo: 'EUR', nombre: 'Euro', bandera: '🇪🇺' },
