@@ -36,7 +36,8 @@ function CriptoContent() {
     const q = busqueda.toLowerCase();
     return lista.filter(
       (c: any) =>
-        (c.nombre ?? "").toLowerCase().includes(q) || (c.simbolo ?? "").toLowerCase().includes(q)
+        (c.nombre ?? "").toLowerCase().includes(q) ||
+        (c.simbolo ?? "").toLowerCase().includes(q)
     );
   }, [cripto.data, busqueda]);
 
@@ -79,7 +80,13 @@ function CriptoContent() {
           {filtradas.map((c: any) => (
             <CryptoCard
               key={c.id ?? Math.random()}
-              crypto={c as CryptoCotizacion}
+              crypto={{
+                ...c,
+                precioUsd: c.precioUsd ?? undefined,
+                variacion24h: c.variacion24h ?? undefined,
+                capitalizacionUsd: c.capitalizacionUsd ?? undefined,
+                volumen24hUsd: c.volumen24hUsd ?? undefined,
+              } as any}
             />
           ))}
         </div>

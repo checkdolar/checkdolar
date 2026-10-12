@@ -3,20 +3,23 @@
 import React from "react";
 
 export interface CryptoData {
-  nombre?: string;
-  simbolo?: string;
-  precioUsd?: number | string;
-  precioArs?: number | string;
-  variacion24h?: number;
-  imagen?: string;
+  id?: string;
+  nombre?: string | null;
+  simbolo?: string | null;
+  precioUsd?: number | string | null;
+  precioArs?: number | string | null;
+  variacion24h?: number | null;
+  variación24h?: number | null;
+  imagen?: string | null;
+  [key: string]: unknown;
 }
 
 interface CryptoCardProps {
-  crypto?: CryptoData;
+  crypto?: CryptoData | any;
 }
 
 export default function CryptoCard({ crypto }: CryptoCardProps) {
-  const data: CryptoData = crypto || {
+  const data = crypto || {
     nombre: "Bitcoin",
     simbolo: "BTC",
     precioUsd: "65,000",
@@ -25,7 +28,8 @@ export default function CryptoCard({ crypto }: CryptoCardProps) {
     imagen: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
   };
 
-  const varNum = typeof data.variacion24h === "number" ? data.variacion24h : 0;
+  const rawVar = data.variacion24h ?? data.variación24h ?? 0;
+  const varNum = typeof rawVar === "number" ? rawVar : Number(rawVar) || 0;
   const esPositivo = varNum >= 0;
 
   return (
@@ -37,7 +41,7 @@ export default function CryptoCard({ crypto }: CryptoCardProps) {
             <img src={data.imagen} alt={data.nombre || "Crypto"} className="h-8 w-8 rounded-full" />
           ) : (
             <div className="h-8 w-8 rounded-full bg-violet-700/50 border border-violet-500/30 flex items-center justify-center font-bold text-white text-xs">
-              {data.simbolo ? data.simbolo.substring(0, 3) : "CRY"}
+              {data.simbolo ? String(data.simbolo).substring(0, 3) : "CRY"}
             </div>
           )}
           <div>
@@ -60,13 +64,13 @@ export default function CryptoCard({ crypto }: CryptoCardProps) {
         <div>
           <span className="text-xs text-violet-300/60 block">USD</span>
           <span className="text-lg font-bold text-white">
-            {data.precioUsd ? `$${data.precioUsd}` : "-"}
+            {data.precioUsd !== null && data.precioUsd !== undefined ? `$${data.precioUsd}` : "-"}
           </span>
         </div>
         <div>
           <span className="text-xs text-violet-300/60 block">ARS</span>
           <span className="text-lg font-bold text-white">
-            {data.precioArs ? `$${data.precioArs}` : "-"}
+            {data.precioArs !== null && data.precioArs !== undefined ? `$${data.precioArs}` : "-"}
           </span>
         </div>
       </div>
