@@ -28,6 +28,21 @@ function computeVariation(key: string, currentValue: number | null): number | nu
   return ((currentValue - previous) / previous) * 100;
 }
 
+// Función helper para verificar pertenencia sin importar si MONEDAS_DOLARAPI es Set, Array u Objeto
+function isMonedaPermitida(codigo: string): boolean {
+  if (!MONEDAS_DOLARAPI) return false;
+  if (typeof (MONEDAS_DOLARAPI as any).has === "function") {
+    return (MONEDAS_DOLARAPI as any).has(codigo);
+  }
+  if (Array.isArray(MONEDAS_DOLARAPI)) {
+    return (MONEDAS_DOLARAPI as any[]).includes(codigo);
+  }
+  if (typeof MONEDAS_DOLARAPI === "object") {
+    return codigo in MONEDAS_DOLARAPI;
+  }
+  return false;
+}
+
 async function fetchJson<T>(path: string): Promise<T> {
   const response = await fetchWithRetry(`${BASE_URL}${path}`, {
     timeoutMs: 6000,
@@ -86,7 +101,7 @@ export async function getCotizacionesRegionales(): Promise<
       const data: MonedaCotizacion[] = raw
         .filter((item) => {
           const codigo = item.moneda?.toUpperCase();
-          return codigo ? MONEDAS_DOLARAPI.has(codigo) : false;
+          return codigo ? isMonedaPermitida(codigo) : false;
         })
         .map((item) => {
           const codigo = item.moneda!.toUpperCase();

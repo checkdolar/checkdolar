@@ -16,7 +16,7 @@ async function fetchDolar(): Promise<ApiEnvelope<DolarCotizacion[]>> {
     const res = await fetch('/api/dolar');
     return await res.json();
   } catch {
-    return { data: [], disponible: false, fuente: '' };
+    return { data: [], disponible: false, fuente: '', actualizadoEn: '' };
   }
 }
 

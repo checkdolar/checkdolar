@@ -7,14 +7,7 @@ import UpdateIndicator from "@/components/UpdateIndicator";
 import BankComparator from "@/components/BankComparator";
 import InflationCalculator from "@/components/InflationCalculator";
 import UvaChart from "@/components/UvaChart";
-
-// Componentes agregados
-import ShareBar from "@/components/ShareBar";
-import QuickConverter from "@/components/QuickConverter";
-import MarketSummaryTicker from "@/components/MarketSummaryTicker";
-import FinancialNews from "@/components/FinancialNews";
-import ExchangeRateAlerts from "@/components/ExchangeRateAlerts";
-import type { DolarCotizacion, FuenteEstado } from "@/lib/types";
+import type { DolarCotizacion } from "@/lib/types";
 
 interface DolarResponse {
   data: DolarCotizacion[];
@@ -45,9 +38,6 @@ function HomeContent() {
 
   return (
     <div className="flex flex-col gap-8 pb-12">
-      {/* Ticker de resumen superior */}
-      <MarketSummaryTicker />
-
       {/* Hero / Título Principal */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -67,18 +57,12 @@ function HomeContent() {
         />
       </div>
 
-      {/* Conversor Rápido */}
-      <QuickConverter cotizaciones={dolar.data?.data ?? []} />
-
       {/* Grilla principal de Dólares */}
       <DolarGrid
         cotizaciones={dolar.data?.data ?? []}
         disponible={dolar.data?.disponible ?? true}
         loading={dolar.loading}
       />
-
-      {/* Alertas de cotización */}
-      <ExchangeRateAlerts cotizaciones={dolar.data?.data ?? []} />
 
       {/* Secciones analíticas e interactivas */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
@@ -88,12 +72,6 @@ function HomeContent() {
 
       {/* Gráfico UVA histórico */}
       <UvaChart />
-
-      {/* Noticias Financieras */}
-      <FinancialNews />
-
-      {/* Barra de Compartir / Redes */}
-      <ShareBar />
     </div>
   );
 }

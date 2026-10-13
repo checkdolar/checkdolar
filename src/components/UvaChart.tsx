@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 export default function UvaChart() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
   const [dias, setDias] = useState(30);
   const [loading, setLoading] = useState(true);
 
